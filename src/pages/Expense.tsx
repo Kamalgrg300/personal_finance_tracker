@@ -11,7 +11,7 @@ import {
   LinearScale,
 } from "chart.js";
 import "./Expense.css";
-// Register chart.js components
+
 ChartJS.register(
   Title,
   Tooltip,
@@ -22,15 +22,24 @@ ChartJS.register(
 );
 
 const Expense: React.FC = () => {
-  const [selectedMonth, setSelectedMonth] = useState<string>("");
+  const [selectedMonth, setSelectedMonth] = useState<string>("January");
   const [selectedExpenseType, setSelectedExpenseType] = useState<string>("");
   const [expenseAmount, setExpenseAmount] = useState<number>(0);
-  const [expenses, setExpenses] = useState<any>({
-    food: 0,
-    rent: 0,
-    clothing: 0,
-    entertainment: 0,
-    miscellaneous: 0,
+
+  // State to store expense data for each month and type
+  const [expenseData, setExpenseData] = useState<any>({
+    January: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    February: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    March: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    April: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    May: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    June: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    July: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    August: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    September: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    October: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    November: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
+    December: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
   });
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -48,38 +57,40 @@ const Expense: React.FC = () => {
   };
 
   const handleAddExpense = () => {
-    if (selectedExpenseType) {
-      setExpenses((prevExpenses: any) => ({
-        ...prevExpenses,
-        [selectedExpenseType]:
-          prevExpenses[selectedExpenseType] + expenseAmount,
+    if (selectedExpenseType && selectedMonth) {
+      setExpenseData((prevData: any) => ({
+        ...prevData,
+        [selectedMonth]: {
+          ...prevData[selectedMonth],
+          [selectedExpenseType]:
+            prevData[selectedMonth][selectedExpenseType] + expenseAmount,
+        },
       }));
+      setExpenseAmount(0); // Reset the expense amount field
     }
   };
 
-  const totalExpense = Object.values(expenses).reduce(
-    (acc, curr) => acc + curr,
-    0
-  );
+  // Total expense for the selected month
+  const totalExpenseForMonth = Object.values(
+    expenseData[selectedMonth] || {}
+  ).reduce((acc: number, curr: number) => acc + curr, 0);
 
-  // Data for the pie chart
+  // Data for the pie chart for the selected month
   const pieChartData = {
-    labels: ["Food", "Rent", "Clothing", "Entertainment", "Miscellaneous"],
+    labels: ["Groceries", "Rent", "Utilities", "Entertainment"],
     datasets: [
       {
         data: [
-          expenses.food,
-          expenses.rent,
-          expenses.clothing,
-          expenses.entertainment,
-          expenses.miscellaneous,
+          expenseData[selectedMonth]?.groceries || 0,
+          expenseData[selectedMonth]?.rent || 0,
+          expenseData[selectedMonth]?.utilities || 0,
+          expenseData[selectedMonth]?.entertainment || 0,
         ],
         backgroundColor: [
-          "#FF5733",
-          "#33FF57",
-          "#3357FF",
-          "#FF33A1",
-          "#F0FF33",
+          "#FF5733", // Groceries
+          "#33FF57", // Rent
+          "#3357FF", // Utilities
+          "#FF33A1", // Entertainment
         ],
       },
     ],
@@ -87,10 +98,13 @@ const Expense: React.FC = () => {
 
   return (
     <div className="expense-container">
-      <img src=" https://m.media-amazon.com/images/I/61JfO8-6-FL._AC_UF1000,1000_QL80_.jpg"></img>
+      <img
+        src="https://m.media-amazon.com/images/I/61JfO8-6-FL._AC_UF1000,1000_QL80_.jpg"
+        alt="Expenses"
+      />
       <h2 className="title">Manage Your Expenses</h2>
       <p className="subtitle">
-        Keep track of your spending here and manage your budget effectively.
+        Track your expenses and manage your financial budget.
       </p>
 
       <div className="form-container">
@@ -98,18 +112,11 @@ const Expense: React.FC = () => {
           <label htmlFor="month">Select Month</label>
           <select id="month" value={selectedMonth} onChange={handleMonthChange}>
             <option value="">--Select Month--</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
+            {Object.keys(expenseData).map((month) => (
+              <option key={month} value={month}>
+                {month}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -121,11 +128,10 @@ const Expense: React.FC = () => {
             onChange={handleExpenseTypeChange}
           >
             <option value="">--Select Expense Type--</option>
-            <option value="food">Food</option>
+            <option value="groceries">Groceries</option>
             <option value="rent">Rent</option>
-            <option value="clothing">Clothing</option>
+            <option value="utilities">Utilities</option>
             <option value="entertainment">Entertainment</option>
-            <option value="miscellaneous">Miscellaneous</option>
           </select>
         </div>
 
@@ -134,7 +140,7 @@ const Expense: React.FC = () => {
           <input
             type="number"
             id="expenseAmount"
-            value={expenseAmount}
+            value={expenseAmount || ""}
             onChange={handleExpenseAmountChange}
             min="0"
             step="0.01"
@@ -148,12 +154,19 @@ const Expense: React.FC = () => {
         </div>
       </div>
 
-      <div className="total-expenses">
-        <h3>Total Expenses: ${totalExpense.toFixed(2)}</h3>
+      <div className="summary">
+        {selectedMonth && (
+          <p>
+            Selected Month: <strong>{selectedMonth}</strong>
+          </p>
+        )}
+        <p>
+          Total Expense for {selectedMonth}: ${totalExpenseForMonth.toFixed(2)}
+        </p>
       </div>
 
       <div className="pie-chart">
-        <h3>Expense Distribution</h3>
+        <h3>Expense Distribution for {selectedMonth}</h3>
         <Pie data={pieChartData} />
       </div>
     </div>

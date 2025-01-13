@@ -11,7 +11,7 @@ import {
   LinearScale,
 } from "chart.js";
 import "./Income.css";
-// Register chart.js components
+
 ChartJS.register(
   Title,
   Tooltip,
@@ -22,14 +22,24 @@ ChartJS.register(
 );
 
 const Income: React.FC = () => {
-  const [selectedMonth, setSelectedMonth] = useState<string>("");
+  const [selectedMonth, setSelectedMonth] = useState<string>("January");
   const [selectedIncomeType, setSelectedIncomeType] = useState<string>("");
   const [incomeAmount, setIncomeAmount] = useState<number>(0);
-  const [income, setIncome] = useState<any>({
-    salary: 0,
-    stocks: 0,
-    rentalIncome: 0,
-    freelance: 0,
+
+  // State to store income data for each month and type
+  const [incomeData, setIncomeData] = useState<any>({
+    January: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    February: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    March: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    April: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    May: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    June: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    July: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    August: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    September: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    October: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    November: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
+    December: { salary: 0, stocks: 0, rentalIncome: 0, freelance: 0 },
   });
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -45,29 +55,34 @@ const Income: React.FC = () => {
   };
 
   const handleAddIncome = () => {
-    if (selectedIncomeType) {
-      setIncome((prevIncome: any) => ({
-        ...prevIncome,
-        [selectedIncomeType]: prevIncome[selectedIncomeType] + incomeAmount,
+    if (selectedIncomeType && selectedMonth) {
+      setIncomeData((prevData: any) => ({
+        ...prevData,
+        [selectedMonth]: {
+          ...prevData[selectedMonth],
+          [selectedIncomeType]:
+            prevData[selectedMonth][selectedIncomeType] + incomeAmount,
+        },
       }));
+      setIncomeAmount(0); // Reset the income amount field
     }
   };
 
-  const totalIncome = Object.values(income).reduce(
-    (acc, curr) => acc + curr,
-    0
-  );
+  // Total income for the selected month
+  const totalIncomeForMonth = Object.values(
+    incomeData[selectedMonth] || {}
+  ).reduce((acc: number, curr: number) => acc + curr, 0);
 
-  // Data for the pie chart
+  // Data for the pie chart for the selected month
   const pieChartData = {
     labels: ["Salary", "Stocks", "Rental Income", "Freelance"],
     datasets: [
       {
         data: [
-          income.salary,
-          income.stocks,
-          income.rentalIncome,
-          income.freelance,
+          incomeData[selectedMonth]?.salary || 0,
+          incomeData[selectedMonth]?.stocks || 0,
+          incomeData[selectedMonth]?.rentalIncome || 0,
+          incomeData[selectedMonth]?.freelance || 0,
         ],
         backgroundColor: [
           "#33FF57", // Salary
@@ -81,7 +96,10 @@ const Income: React.FC = () => {
 
   return (
     <div className="income-container">
-      <img src="https://thumbs.dreamstime.com/b/income-streams-words-wooden-block-background-stacks-coins-341370764.jpg"></img>
+      <img
+        src="https://thumbs.dreamstime.com/b/income-streams-words-wooden-block-background-stacks-coins-341370764.jpg"
+        alt="Income"
+      />
       <h2 className="title">Manage Your Income</h2>
       <p className="subtitle">
         Track your earnings and manage your financial goals.
@@ -92,18 +110,11 @@ const Income: React.FC = () => {
           <label htmlFor="month">Select Month</label>
           <select id="month" value={selectedMonth} onChange={handleMonthChange}>
             <option value="">--Select Month--</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
+            {Object.keys(incomeData).map((month) => (
+              <option key={month} value={month}>
+                {month}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -147,22 +158,13 @@ const Income: React.FC = () => {
             Selected Month: <strong>{selectedMonth}</strong>
           </p>
         )}
-        {selectedIncomeType && (
-          <p>
-            Selected Income Type: <strong>{selectedIncomeType}</strong>
-          </p>
-        )}
         <p>
-          Entered Income Amount: <strong>${incomeAmount.toFixed(2)}</strong>
+          Total Income for {selectedMonth}: ${totalIncomeForMonth.toFixed(2)}
         </p>
       </div>
 
-      <div className="total-income">
-        <h3>Total Income: ${totalIncome.toFixed(2)}</h3>
-      </div>
-
       <div className="pie-chart">
-        <h3>Income Distribution</h3>
+        <h3>Income Distribution for {selectedMonth}</h3>
         <Pie data={pieChartData} />
       </div>
     </div>

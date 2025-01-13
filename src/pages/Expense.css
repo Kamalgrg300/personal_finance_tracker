@@ -87,11 +87,11 @@ input {
 select:focus,
 input:focus {
   outline: none;
-  border-color: #33ff57;
+  border-color: #ff5733;
 }
 
 button.add-expense-btn {
-  background-color: #33ff57;
+  background-color: #ff5733;
   color: white;
   padding: 15px 20px;
   font-size: 1.2rem;
@@ -104,10 +104,10 @@ button.add-expense-btn {
 }
 
 button.add-expense-btn:hover {
-  background-color: #28a745;
+  background-color: #c13c2b;
 }
 
-.total-expenses {
+.summary {
   margin-top: 30px;
   font-size: 1.2rem;
   color: #fff;
@@ -118,8 +118,15 @@ button.add-expense-btn:hover {
   max-width: 600px;
 }
 
-.total-expenses strong {
+.summary strong {
   font-weight: 700;
+}
+
+.total-expenses {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
 }
 
 .pie-chart {
@@ -177,12 +184,12 @@ button.add-expense-btn:hover {
     padding: 12px;
   }
 
-  .total-expenses {
+  .summary {
     padding: 15px;
   }
 
-  .pie-chart {
-    margin-top: 30px;
+  .total-expenses {
+    font-size: 1.2rem;
   }
 }
 

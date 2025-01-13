@@ -11,7 +11,6 @@ import {
 } from "chart.js";
 import "./Accounts.css";
 
-// Register chart.js components
 ChartJS.register(
   Title,
   Tooltip,
@@ -22,13 +21,24 @@ ChartJS.register(
 );
 
 const Accounts: React.FC = () => {
-  const [selectedMonth, setSelectedMonth] = useState<string>("");
+  const [selectedMonth, setSelectedMonth] = useState<string>("January");
   const [selectedAccountType, setSelectedAccountType] = useState<string>("");
   const [accountAmount, setAccountAmount] = useState<number>(0);
-  const [accounts, setAccounts] = useState<any>({
-    checking: 0,
-    saving: 0,
-    fixed: 0,
+
+  // State to store account data for each month and type
+  const [accountData, setAccountData] = useState<any>({
+    January: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    February: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    March: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    April: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    May: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    June: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    July: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    August: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    September: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    October: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    November: { savings: 0, checking: 0, credit: 0, investments: 0 },
+    December: { savings: 0, checking: 0, credit: 0, investments: 0 },
   });
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -46,54 +56,66 @@ const Accounts: React.FC = () => {
   };
 
   const handleAddAccount = () => {
-    if (selectedAccountType) {
-      setAccounts((prevAccounts: any) => ({
-        ...prevAccounts,
-        [selectedAccountType]:
-          prevAccounts[selectedAccountType] + accountAmount,
+    if (selectedAccountType && selectedMonth) {
+      setAccountData((prevData: any) => ({
+        ...prevData,
+        [selectedMonth]: {
+          ...prevData[selectedMonth],
+          [selectedAccountType]:
+            prevData[selectedMonth][selectedAccountType] + accountAmount,
+        },
       }));
+      setAccountAmount(0); // Reset the account amount field
     }
   };
 
-  const totalAccounts = Object.values(accounts).reduce(
-    (acc, curr) => acc + curr,
-    0
-  );
+  // Total account balance for the selected month
+  const totalAccountsForMonth = Object.values(
+    accountData[selectedMonth] || {}
+  ).reduce((acc: number, curr: number) => acc + curr, 0);
 
-  // Data for the pie chart
+  // Data for the pie chart for the selected month
   const pieChartData = {
-    labels: ["Checking", "Saving", "Fixed"],
+    labels: ["Savings", "Checking", "Credit", "Investments"],
     datasets: [
       {
-        data: [accounts.checking, accounts.saving, accounts.fixed],
-        backgroundColor: ["#FF5733", "#33FF57", "#3357FF"],
+        data: [
+          accountData[selectedMonth]?.savings || 0,
+          accountData[selectedMonth]?.checking || 0,
+          accountData[selectedMonth]?.credit || 0,
+          accountData[selectedMonth]?.investments || 0,
+        ],
+        backgroundColor: [
+          "#33FF57", // Savings
+          "#FF5733", // Checking
+          "#3357FF", // Credit
+          "#FF33A1", // Investments
+        ],
       },
     ],
   };
 
   return (
     <div className="accounts-container">
-      <img src="https://s.yimg.com/ny/api/res/1.2/Twm561nnkJ5yvcjmJX5GEg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://media.zenfs.com/en/gobankingrates_644/43d319841df483aa5e9fd7f67d9e08ba "></img>
+      <img
+        src="https://npscu.ca/wp-content/uploads/2023/09/4.png"
+        alt="Accounts"
+      />
       <h2 className="title">Manage Your Accounts</h2>
-      <p className="subtitle">Track and manage your income accounts here.</p>
+      <p className="subtitle">
+        Track your account balances and maintain financial health.
+      </p>
 
       <div className="form-container">
         <div className="form-group">
           <label htmlFor="month">Select Month</label>
           <select id="month" value={selectedMonth} onChange={handleMonthChange}>
             <option value="">--Select Month--</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
+            {Object.keys(accountData).map((month) => (
+              <option key={month} value={month}>
+                {month}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -105,18 +127,19 @@ const Accounts: React.FC = () => {
             onChange={handleAccountTypeChange}
           >
             <option value="">--Select Account Type--</option>
+            <option value="savings">Savings</option>
             <option value="checking">Checking</option>
-            <option value="saving">Saving</option>
-            <option value="fixed">Fixed</option>
+            <option value="credit">Credit</option>
+            <option value="investments">Investments</option>
           </select>
         </div>
 
         <div className="form-group">
-          <label htmlFor="accountAmount">Enter Amount ($)</label>
+          <label htmlFor="accountAmount">Enter Account Amount ($)</label>
           <input
             type="number"
             id="accountAmount"
-            value={accountAmount}
+            value={accountAmount || ""}
             onChange={handleAccountAmountChange}
             min="0"
             step="0.01"
@@ -130,12 +153,20 @@ const Accounts: React.FC = () => {
         </div>
       </div>
 
-      <div className="total-accounts">
-        <h3>Total Accounts: ${totalAccounts.toFixed(2)}</h3>
+      <div className="summary">
+        {selectedMonth && (
+          <p>
+            Selected Month: <strong>{selectedMonth}</strong>
+          </p>
+        )}
+        <p>
+          Total Accounts Balance for {selectedMonth}: $
+          {totalAccountsForMonth.toFixed(2)}
+        </p>
       </div>
 
       <div className="pie-chart">
-        <h3>Account Distribution</h3>
+        <h3>Account Distribution for {selectedMonth}</h3>
         <Pie data={pieChartData} />
       </div>
     </div>
