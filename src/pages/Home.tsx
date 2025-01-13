@@ -3,6 +3,7 @@ import "./Home.css";
 
 const Home: React.FC = () => (
   <div className="container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUTdxV7t_MkiO3tJ_UZWO_w2lmy_5E0Fb0D-aOQzOW2X_bAZXPy-LK9-mPqb6dcQqPJxk&usqp=CAU"></img>
     <h1>Welcome to Personal Finance Tracker 2025</h1>
     <div className="box">
       <h2>Track Your Finances Efficiently</h2>

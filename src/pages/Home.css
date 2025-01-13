@@ -1,123 +1,121 @@
-/* General Styles */
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: "Arial", sans-serif;
+  background: linear-gradient(
+    135deg,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
+  color: white;
+  overflow-x: hidden;
 }
 
-body {
-  background-color: #f4f7fc;
-  color: #333;
-  line-height: 1.6;
-  padding: 0;
-  font-size: 16px;
-}
-
-/* Container */
 .container {
-  max-width: 1200px;
-  margin: 40px auto;
+  position: relative;
   padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   text-align: center;
+  z-index: 1;
+  margin-top: 60px;
 }
 
-/* Title */
+.container img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.7;
+}
+
 h1 {
   font-size: 2.5rem;
-  color: #2d3e50;
-  margin-bottom: 20px;
-  font-weight: bold;
+  font-weight: 700;
+  margin-top: 50px;
+  color: #fff;
+  text-transform: uppercase;
 }
 
-/* Box Styles for Each Section */
 .box {
-  background-color: #ffffff;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px;
   margin: 20px 0;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  animation: slideUp 0.5s ease-out;
 }
 
-.box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+.box h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
 }
 
-/* Subtitle */
-h2 {
-  font-size: 1.8rem;
-  color: #4a6fa5;
-  margin: 20px 0;
-  font-weight: 600;
-}
-
-/* Paragraphs */
-p {
+.box p {
   font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-ul {
+.box ul {
   list-style: none;
-  margin: 0;
   padding: 0;
 }
 
-ul li {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 10px;
-  text-align: left;
-  line-height: 1.6;
-}
-
-ul li strong {
-  color: #2d3e50;
-}
-
-/* AI Design Box */
-.ai-box {
-  border: 2px solid #4a6fa5;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 40px;
-}
-
-.ai-box h2 {
-  color: #3e7ccf;
-}
-
-.ai-box p {
-  font-style: italic;
-  color: #444;
-}
-
-/* Call to Action Button */
-button {
-  background-color: #4a6fa5;
-  color: white;
-  border: none;
-  padding: 10px 20px;
+.box ul li {
   font-size: 1rem;
-  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.box ul li strong {
+  color: #33ff57;
+}
+
+.ai-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #33ff57;
+  color: white;
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  border-radius: 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border: none;
+  margin-top: 20px;
 }
 
 button:hover {
-  background-color: #2d3e50;
+  background-color: #28a745;
 }
 
-/* Responsive Styles */
+/* Animations */
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .container {
     padding: 20px;
@@ -127,52 +125,19 @@ button:hover {
     font-size: 2rem;
   }
 
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-
-  ul li {
-    font-size: 1rem;
-  }
-
-  .ai-box {
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 15px;
-    margin: 20px auto;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
-
-  p {
-    font-size: 0.9rem;
-  }
-
-  ul li {
-    font-size: 0.9rem;
+  .box {
+    padding: 20px;
   }
 
   button {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    padding: 12px;
   }
+}
 
-  .ai-box {
-    padding: 15px;
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .container {
+    padding: 30px;
   }
 }
