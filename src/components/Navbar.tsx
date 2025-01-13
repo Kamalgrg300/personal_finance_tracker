@@ -1,21 +1,46 @@
 /* src/components/Navbar.tsx */
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar: React.FC = () => (
-  <nav style={{ backgroundColor: "#4caf50", padding: "10px" }}>
-    <Link to="/" style={{ marginRight: "15px", color: "#fff" }}>
-      Home
-    </Link>
-    <Link to="/income" style={{ marginRight: "15px", color: "#fff" }}>
-      Income
-    </Link>
-    <Link to="/expense" style={{ marginRight: "15px", color: "#fff" }}>
-      Expense
-    </Link>
-    <Link to="/savings" style={{ color: "#fff" }}>
-      Accounts
-    </Link>
+  <nav className="navbar">
+    <div className="logo">Personal Finance Tracker</div>
+    <div className="nav-links">
+      <Link to="/" className="nav-link">
+        Home
+      </Link>
+      <div className="dropdown">
+        <Link to="#" className="nav-link dropdown-link">
+          Income
+        </Link>
+        <div className="dropdown-content">
+          <Link to="/income" className="nav-link">
+            Income Tracker
+          </Link>
+        </div>
+      </div>
+      <div className="dropdown">
+        <Link to="#" className="nav-link dropdown-link">
+          Expense
+        </Link>
+        <div className="dropdown-content">
+          <Link to="/expense" className="nav-link">
+            Expense Tracker
+          </Link>
+        </div>
+      </div>
+      <div className="dropdown">
+        <Link to="#" className="nav-link dropdown-link">
+          Accounts
+        </Link>
+        <div className="dropdown-content">
+          <Link to="/savings" className="nav-link">
+            Manage Accounts
+          </Link>
+        </div>
+      </div>
+    </div>
   </nav>
 );
 

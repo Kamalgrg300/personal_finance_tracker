@@ -1,130 +1,101 @@
-/* General Styling */
 .income-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: "Arial", sans-serif;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  background: linear-gradient(
+    135deg,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: auto;
 }
 
-.income-container:hover {
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
-}
-
-/* Title Styling */
 .title {
-  text-align: center;
   font-size: 2.5rem;
-  color: #2c3e50;
+  font-weight: bold;
+  text-align: center;
   margin-bottom: 10px;
-  font-weight: 600;
 }
 
 .subtitle {
-  text-align: center;
   font-size: 1.2rem;
-  color: #7f8c8d;
+  text-align: center;
   margin-bottom: 30px;
 }
 
-/* Form Styling */
 .form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   margin-bottom: 30px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 10px;
 }
 
 label {
-  font-size: 1.1rem;
-  color: #34495e;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 select,
-input[type="number"] {
-  padding: 0.8rem;
+input {
+  padding: 10px;
   font-size: 1rem;
   border-radius: 5px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  color: #34495e;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  visibility: visible; /* Ensure the input is always visible */
+  border: 2px solid #fff;
+  background-color: transparent;
+  color: white;
 }
 
 select:focus,
-input[type="number"]:focus {
+input:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.6);
+  border-color: #33ff57; /* Greenish focus color for income */
 }
 
-button {
-  padding: 0.9rem 1.5rem;
-  font-size: 1.1rem;
-  color: #fff;
-  background-color: #3498db;
-  border: none;
-  border-radius: 5px;
+.add-income-btn {
+  background-color: #33ff57; /* Greenish button for income */
+  color: white;
+  padding: 15px;
+  font-size: 1.2rem;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #2980b9;
-  transform: scale(1.05);
+.add-income-btn:hover {
+  background-color: #28a745; /* Slightly darker green on hover */
 }
 
-/* Summary Section */
 .summary {
   text-align: center;
-  font-size: 1.2rem;
-  color: #34495e;
   margin-bottom: 30px;
+  font-size: 1.2rem;
 }
 
-.summary strong {
-  color: #3498db;
-}
-
-/* Total Income */
 .total-income {
   text-align: center;
-  margin-top: 20px;
+  margin-bottom: 30px;
   font-size: 1.5rem;
-  font-weight: 600;
-  color: #2c3e50;
 }
 
-/* Pie Chart */
 .pie-chart {
-  margin-top: 40px;
   text-align: center;
 }
 
-.pie-chart h3 {
-  font-size: 1.5rem;
-  color: #34495e;
-  margin-bottom: 15px;
-}
-
-/* Responsive Styling */
 @media (max-width: 768px) {
-  .income-container {
-    padding: 1.5rem;
+  .form-container {
+    grid-template-columns: 1fr;
   }
 
-  .form-container {
-    gap: 1rem;
+  .income-container {
+    padding: 20px;
   }
 
   .title {
@@ -132,57 +103,11 @@ button:hover {
   }
 
   .subtitle {
-    font-size: 1.1rem;
-  }
-
-  .form-group {
-    gap: 0.3rem;
-  }
-
-  label {
     font-size: 1rem;
   }
 
-  select,
-  input[type="number"] {
-    font-size: 0.95rem;
-    padding: 0.7rem;
-  }
-
-  button {
+  .add-income-btn {
     font-size: 1rem;
-    padding: 0.8rem 1.2rem;
-  }
-
-  .total-income {
-    font-size: 1.3rem;
-  }
-
-  .pie-chart h3 {
-    font-size: 1.2rem;
-  }
-}
-
-/* Larger Screens */
-@media (min-width: 1200px) {
-  .income-container {
-    max-width: 1100px;
-    padding: 3rem;
-  }
-
-  .title {
-    font-size: 3rem;
-  }
-
-  .subtitle {
-    font-size: 1.3rem;
-  }
-
-  .total-income {
-    font-size: 1.8rem;
-  }
-
-  .pie-chart h3 {
-    font-size: 1.8rem;
+    padding: 12px;
   }
 }
