@@ -87,6 +87,7 @@ const Expense: React.FC = () => {
 
   return (
     <div className="expense-container">
+      <img src=" https://m.media-amazon.com/images/I/61JfO8-6-FL._AC_UF1000,1000_QL80_.jpg"></img>
       <h2 className="title">Manage Your Expenses</h2>
       <p className="subtitle">
         Keep track of your spending here and manage your budget effectively.

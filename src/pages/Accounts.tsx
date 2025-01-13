@@ -73,6 +73,7 @@ const Accounts: React.FC = () => {
 
   return (
     <div className="accounts-container">
+      <img src="https://s.yimg.com/ny/api/res/1.2/Twm561nnkJ5yvcjmJX5GEg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://media.zenfs.com/en/gobankingrates_644/43d319841df483aa5e9fd7f67d9e08ba "></img>
       <h2 className="title">Manage Your Accounts</h2>
       <p className="subtitle">Track and manage your income accounts here.</p>
 

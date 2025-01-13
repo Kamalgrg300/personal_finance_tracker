@@ -1,113 +1,198 @@
-.expense-container {
+/* src/pages/Expense.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
   background: linear-gradient(
     135deg,
     rgba(63, 94, 251, 1) 0%,
     rgba(252, 70, 107, 1) 100%
   );
   color: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
-  margin: auto;
+  overflow-x: hidden;
+}
+
+.expense-container {
+  position: relative;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+  margin-top: 60px; /* Adjust margin to prevent overlap with navbar */
+}
+
+.expense-container img {
+  width: 100%;
+  height: 100vh; /* Ensure it takes the full height of the viewport */
+  object-fit: cover; /* Scale the image to cover the entire container */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Keep the image in the background */
+  opacity: 0.7; /* Apply transparency so text remains visible */
 }
 
 .title {
-  font-size: 3rem; /* Larger title for better visibility */
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 50px;
   color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Shadow effect for emphasis */
+  text-transform: uppercase;
 }
 
 .subtitle {
-  font-size: 1.5rem; /* Larger subtitle for better focus */
-  text-align: center;
+  font-size: 1.3rem;
   margin-bottom: 30px;
-  color: #fff;
-  font-style: italic; /* Italicized text for emphasis */
-  letter-spacing: 0.5px; /* Slight letter spacing for readability */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Soft shadow for contrast */
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .form-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px;
   margin-bottom: 30px;
+  animation: slideUp 0.5s ease-out;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-bottom: 20px;
 }
 
 label {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
+  margin-bottom: 8px;
 }
 
 select,
 input {
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 8px;
   border: 2px solid #fff;
   background-color: transparent;
   color: white;
+  margin-top: 5px;
 }
 
 select:focus,
 input:focus {
   outline: none;
-  border-color: #ff5733;
+  border-color: #33ff57;
 }
 
-.add-expense-btn {
-  background-color: #ff5733;
+button.add-expense-btn {
+  background-color: #33ff57;
   color: white;
-  padding: 15px;
+  padding: 15px 20px;
   font-size: 1.2rem;
   border-radius: 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 20px;
+  border: none;
 }
 
-.add-expense-btn:hover {
-  background-color: #c9452e;
+button.add-expense-btn:hover {
+  background-color: #28a745;
 }
 
 .total-expenses {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 1.5rem;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.total-expenses strong {
+  font-weight: 700;
 }
 
 .pie-chart {
-  text-align: center;
+  margin-top: 40px;
+  width: 80%;
+  max-width: 700px;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-@media (max-width: 768px) {
-  .form-container {
-    grid-template-columns: 1fr;
-  }
+.pie-chart h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
 
+/* Animations */
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
   .expense-container {
     padding: 20px;
   }
 
+  .form-container {
+    padding: 20px;
+  }
+
   .title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
-  .add-expense-btn {
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  button.add-expense-btn {
     font-size: 1rem;
     padding: 12px;
+  }
+
+  .total-expenses {
+    padding: 15px;
+  }
+
+  .pie-chart {
+    margin-top: 30px;
+  }
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .expense-container {
+    padding: 30px;
+  }
+
+  .pie-chart {
+    margin-top: 30px;
   }
 }

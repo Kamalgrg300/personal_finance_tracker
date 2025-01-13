@@ -81,6 +81,7 @@ const Income: React.FC = () => {
 
   return (
     <div className="income-container">
+      <img src="https://thumbs.dreamstime.com/b/income-streams-words-wooden-block-background-stacks-coins-341370764.jpg"></img>
       <h2 className="title">Manage Your Income</h2>
       <p className="subtitle">
         Track your earnings and manage your financial goals.
