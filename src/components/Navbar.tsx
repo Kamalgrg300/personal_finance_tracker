@@ -14,7 +14,7 @@ const Navbar: React.FC = () => (
       Expense
     </Link>
     <Link to="/savings" style={{ color: "#fff" }}>
-      Savings
+      Accounts
     </Link>
   </nav>
 );

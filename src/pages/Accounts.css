@@ -1,0 +1,188 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background-color: #f0f4f8;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Container */
+.accounts-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Title */
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* Subtitle */
+.subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+}
+
+/* Form Section */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+select,
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+select:focus,
+input:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357abd;
+}
+
+/* Total Accounts Section */
+.total-accounts {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+/* Pie Chart Section */
+.pie-chart {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.pie-chart h3 {
+  font-size: 1.8rem;
+  color: #34495e;
+  margin-bottom: 20px;
+}
+
+/* AI Design Box */
+.ai-box {
+  border: 2px solid #4a90e2;
+  background: linear-gradient(135deg, #e8f6fc, #d4e7fa);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  text-align: center;
+}
+
+.ai-box h3 {
+  font-size: 1.7rem;
+  color: #2c3e50;
+}
+
+.ai-box p {
+  font-style: italic;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .accounts-container {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .form-container {
+    gap: 15px;
+  }
+
+  .total-accounts,
+  .pie-chart h3 {
+    font-size: 1.3rem;
+  }
+
+  .ai-box {
+    padding: 15px;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .accounts-container {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .form-container {
+    gap: 12px;
+  }
+
+  .total-accounts,
+  .pie-chart h3 {
+    font-size: 1.1rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .ai-box {
+    margin-top: 20px;
+    padding: 12px;
+  }
+}

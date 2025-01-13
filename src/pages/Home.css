@@ -1,0 +1,178 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background-color: #f4f7fc;
+  color: #333;
+  line-height: 1.6;
+  padding: 0;
+  font-size: 16px;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Title */
+h1 {
+  font-size: 2.5rem;
+  color: #2d3e50;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Box Styles for Each Section */
+.box {
+  background-color: #ffffff;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Subtitle */
+h2 {
+  font-size: 1.8rem;
+  color: #4a6fa5;
+  margin: 20px 0;
+  font-weight: 600;
+}
+
+/* Paragraphs */
+p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+ul li strong {
+  color: #2d3e50;
+}
+
+/* AI Design Box */
+.ai-box {
+  border: 2px solid #4a6fa5;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+.ai-box h2 {
+  color: #3e7ccf;
+}
+
+.ai-box p {
+  font-style: italic;
+  color: #444;
+}
+
+/* Call to Action Button */
+button {
+  background-color: #4a6fa5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2d3e50;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  ul li {
+    font-size: 1rem;
+  }
+
+  .ai-box {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  ul li {
+    font-size: 0.9rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1.1rem;
+  }
+
+  .ai-box {
+    padding: 15px;
+  }
+}

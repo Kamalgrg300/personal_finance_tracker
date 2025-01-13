@@ -7,7 +7,7 @@ import "./styles/global.css";
 const Home = lazy(() => import("./pages/Home"));
 const Income = lazy(() => import("./pages/Income"));
 const Expense = lazy(() => import("./pages/Expense"));
-const Savings = lazy(() => import("./pages/Savings"));
+const Savings = lazy(() => import("./pages/Accounts"));
 
 const App: React.FC = () => (
   <Router>
