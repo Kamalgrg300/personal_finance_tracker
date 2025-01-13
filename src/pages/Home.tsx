@@ -1,11 +1,10 @@
-// src/pages/Home.tsx
+/* src/pages/Home.tsx */
 import React from "react";
-import Dashboard from "../components/Dashboard";
 
-const Home = () => (
-  <div>
+const Home: React.FC = () => (
+  <div className="container">
     <h1>Welcome to Personal Finance Tracker</h1>
-    <Dashboard />
+    <p>Track your income, expenses, and savings goals easily!</p>
   </div>
 );
 

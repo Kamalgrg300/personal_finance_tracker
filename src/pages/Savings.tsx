@@ -1,10 +1,10 @@
-// src/pages/Savings.tsx
+/* src/pages/Savings.tsx */
 import React from "react";
 
-const Savings = () => (
-  <div>
-    <h2>Track Savings Goals</h2>
-    <p>Coming soon...</p>
+const Savings: React.FC = () => (
+  <div className="container">
+    <h2>Savings Goals</h2>
+    <p>Set and achieve your savings goals efficiently.</p>
   </div>
 );
 
