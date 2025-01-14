@@ -1,16 +1,14 @@
-// IncomeExpenseTracker.tsx
 import React, { useState } from "react";
-import { Bar } from "react-chartjs-2";
-import { Pie } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
+  BarElement,
   ArcElement,
   CategoryScale,
   LinearScale,
-  BarElement,
 } from "chart.js";
 import "./IncomeExpenseTracker.css";
 
@@ -18,131 +16,162 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  BarElement,
   ArcElement,
   CategoryScale,
-  LinearScale,
-  BarElement
+  LinearScale
 );
 
 const IncomeExpenseTracker: React.FC = () => {
-  const [year, setYear] = useState<number>(new Date().getFullYear());
-  const [monthlyData, setMonthlyData] = useState(
-    Array.from({ length: 12 }, (_, index) => ({
-      month: new Date(0, index).toLocaleString("default", { month: "long" }),
-      income: 0,
-      expense: 0,
-      savings: 0,
-    }))
-  );
+  const [data, setData] = useState<any>({
+    January: { income: 0, expense: 0 },
+    February: { income: 0, expense: 0 },
+    March: { income: 0, expense: 0 },
+    April: { income: 0, expense: 0 },
+    May: { income: 0, expense: 0 },
+    June: { income: 0, expense: 0 },
+    July: { income: 0, expense: 0 },
+    August: { income: 0, expense: 0 },
+    September: { income: 0, expense: 0 },
+    October: { income: 0, expense: 0 },
+    November: { income: 0, expense: 0 },
+    December: { income: 0, expense: 0 },
+  });
+  const [selectedMonth, setSelectedMonth] = useState<string>("January");
+  const [income, setIncome] = useState<number>(0);
+  const [expense, setExpense] = useState<number>(0);
 
-  const handleIncomeChange = (monthIndex: number, income: number) => {
-    setMonthlyData((prev) => {
-      const updated = [...prev];
-      updated[monthIndex].income = income;
-      updated[monthIndex].savings = income * 0.2;
-      return updated;
-    });
+  const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedMonth(e.target.value);
   };
 
-  const handleExpenseChange = (monthIndex: number, expense: number) => {
-    setMonthlyData((prev) => {
-      const updated = [...prev];
-      if (expense > updated[monthIndex].income) {
-        alert("Expense cannot exceed income!");
-        return prev;
-      }
-      updated[monthIndex].expense = expense;
-      return updated;
-    });
+  const handleIncomeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIncome(Number(e.target.value));
   };
 
-  const chartData = {
-    labels: monthlyData.map((data) => data.month),
+  const handleExpenseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setExpense(Number(e.target.value));
+  };
+
+  const handleUpdate = () => {
+    if (expense > income) {
+      alert("Expense cannot exceed Income!");
+      return;
+    }
+    setData((prevData: any) => ({
+      ...prevData,
+      [selectedMonth]: {
+        income,
+        expense,
+      },
+    }));
+    setIncome(0);
+    setExpense(0);
+  };
+
+  const barChartData = {
+    labels: ["Income", "Expense"],
     datasets: [
       {
-        label: "Income",
-        data: monthlyData.map((data) => data.income),
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-      },
-      {
-        label: "Expense",
-        data: monthlyData.map((data) => data.expense),
-        backgroundColor: "rgba(255, 99, 132, 0.6)",
-      },
-      {
-        label: "Savings",
-        data: monthlyData.map((data) => data.savings),
-        backgroundColor: "rgba(153, 102, 255, 0.6)",
+        label: `Income vs Expense for ${selectedMonth}`,
+        data: [data[selectedMonth].income, data[selectedMonth].expense],
+        backgroundColor: ["#33FF57", "#FF5733"],
+        borderColor: ["#28a745", "#e74c3c"],
+        borderWidth: 1,
       },
     ],
   };
 
-  const yearlyProgressData = {
-    labels: monthlyData.map((data) => data.month),
+  const pieChartData = {
+    labels: ["Income", "Expense"],
     datasets: [
       {
-        label: "Yearly Progress",
-        data: monthlyData.map(
-          (data) => data.income - (data.expense + data.savings)
-        ),
-        backgroundColor: "rgba(54, 162, 235, 0.6)",
+        data: [data[selectedMonth].income, data[selectedMonth].expense],
+        backgroundColor: ["#33FF57", "#FF5733"],
       },
     ],
   };
 
   return (
     <div className="tracker-container">
-      <h1>Income vs Expense Tracker</h1>
+      <img
+        src="https://previews.123rf.com/images/bobaa22/bobaa221410/bobaa22141000052/33120788-income-and-expenses-concept.jpg"
+        alt="Income and Expense"
+      />
+      <h2 className="title">Income vs Expense Tracker</h2>
+      <p className="subtitle">
+        Track and compare your income and expenses monthly.
+      </p>
 
-      <div className="year-selector">
-        <label htmlFor="year">Select Year:</label>
-        <select
-          id="year"
-          value={year}
-          onChange={(e) => setYear(Number(e.target.value))}
-        >
-          {Array.from({ length: 5 }, (_, i) => (
-            <option key={i} value={new Date().getFullYear() - i}>
-              {new Date().getFullYear() - i}
-            </option>
-          ))}
-        </select>
+      <div className="form-container">
+        <div className="form-group">
+          <label htmlFor="month">Select Month</label>
+          <select id="month" value={selectedMonth} onChange={handleMonthChange}>
+            <option value="">--Select Month--</option>
+            {Object.keys(data).map((month) => (
+              <option key={month} value={month}>
+                {month}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="income">Enter Income ($)</label>
+          <input
+            type="number"
+            id="income"
+            value={income || ""}
+            onChange={handleIncomeChange}
+            min="0"
+            step="0.01"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="expense">Enter Expense ($)</label>
+          <input
+            type="number"
+            id="expense"
+            value={expense || ""}
+            onChange={handleExpenseChange}
+            min="0"
+            step="0.01"
+          />
+        </div>
+
+        <div className="form-group">
+          <button onClick={handleUpdate} className="update-btn">
+            Update
+          </button>
+        </div>
       </div>
 
-      <div className="input-section">
-        {monthlyData.map((data, index) => (
-          <div key={index} className="month-input">
-            <h3>{data.month}</h3>
-            <label>
-              Income:
-              <input
-                type="number"
-                value={data.income}
-                onChange={(e) =>
-                  handleIncomeChange(index, Number(e.target.value))
-                }
-              />
-            </label>
-            <label>
-              Expense:
-              <input
-                type="number"
-                value={data.expense}
-                onChange={(e) =>
-                  handleExpenseChange(index, Number(e.target.value))
-                }
-              />
-            </label>
-            <p>Savings: {data.savings.toFixed(2)}</p>
-          </div>
-        ))}
+      <div className="summary">
+        <p>
+          Income for {selectedMonth}:{" "}
+          <strong>${data[selectedMonth].income.toFixed(2)}</strong>
+        </p>
+        <p>
+          Expense for {selectedMonth}:{" "}
+          <strong>${data[selectedMonth].expense.toFixed(2)}</strong>
+        </p>
       </div>
 
-      <div className="chart-section">
-        <h2>Monthly Income vs Expense</h2>
-        <Bar data={chartData} />
-        <h2>Yearly Progress</h2>
-        <Bar data={yearlyProgressData} />
+      <div className="chart-container">
+        <div className="bar-chart">
+          <h3>
+            Income vs Expense Distribution for {selectedMonth} (Bar Graph)
+          </h3>
+          <Bar data={barChartData} options={{ responsive: true }} />
+        </div>
+
+        <div className="pie-chart">
+          <h3>
+            Income vs Expense Distribution for {selectedMonth} (Pie Chart)
+          </h3>
+          <Pie data={pieChartData} options={{ responsive: true }} />
+        </div>
       </div>
     </div>
   );

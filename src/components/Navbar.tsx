@@ -39,7 +39,9 @@ const Navbar: React.FC = () => (
           </Link>
         </div>
       </div>
-      <Link to="/tracker" className="nav-link">
+      <Link to="/income-expense-tracker" className="nav-link">
+        {" "}
+        {/* Updated link */}
         Income & Expense Tracker
       </Link>
     </div>

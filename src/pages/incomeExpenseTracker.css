@@ -1,108 +1,216 @@
-/* IncomeExpenseTracker.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(
+    135deg,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
+  color: white;
+  overflow-x: hidden;
+}
 
 .tracker-container {
-  font-family: Arial, sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
+  position: relative;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.year-selector {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  margin-bottom: 20px;
-}
-
-.year-selector label {
-  margin-right: 10px;
-  font-size: 16px;
-  color: #555;
-}
-
-.year-selector select {
-  padding: 5px 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.input-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
-
-.month-input {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 15px;
-  flex: 1 1 calc(33.333% - 20px);
-  box-sizing: border-box;
-  min-width: 250px;
-}
-
-.month-input h3 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.month-input label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #555;
-}
-
-.month-input input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.month-input p {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #333;
-  font-weight: bold;
-}
-
-.chart-section {
-  margin-top: 20px;
-}
-
-.chart-section h2 {
   text-align: center;
-  color: #333;
+  z-index: 1;
+  margin-top: 60px; /* Adjust margin to prevent overlap with navbar */
+}
+
+.tracker-container img {
+  width: 100%;
+  height: 100vh; /* Ensure it takes the full height of the viewport */
+  object-fit: cover; /* Scale the image to cover the entire container */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Keep the image in the background */
+  opacity: 0.7; /* Apply transparency so text remains visible */
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 50px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.form-container {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+  animation: slideUp 0.5s ease-out;
+}
+
+.form-group {
   margin-bottom: 20px;
 }
 
+label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  background-color: transparent;
+  color: white;
+  margin-top: 5px;
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: #ff5733;
+}
+
+button.update-btn {
+  background-color: #33ff57;
+  color: white;
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+}
+
+button.update-btn:hover {
+  background-color: #28b34f;
+}
+
+.summary {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.summary strong {
+  font-weight: 700;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 40px;
+  gap: 30px; /* Adds space between the charts */
+}
+
+.bar-chart,
+.pie-chart {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.pie-chart h3,
+.bar-chart h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Animations */
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .month-input {
-    flex: 1 1 100%;
+  .tracker-container {
+    padding: 20px;
   }
 
-  .year-selector {
-    flex-direction: column;
+  .form-container {
+    padding: 20px;
   }
 
-  .year-selector label {
-    margin-bottom: 5px;
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  button.update-btn {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .summary {
+    padding: 15px;
+  }
+
+  .chart-container {
+    flex-direction: column; /* Stack charts vertically on mobile */
+    gap: 20px;
+  }
+
+  .pie-chart,
+  .bar-chart {
+    width: 100%;
+  }
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .tracker-container {
+    padding: 30px;
+  }
+
+  .chart-container {
+    flex-direction: column; /* Stack charts vertically on tablets */
+  }
+
+  .pie-chart,
+  .bar-chart {
+    width: 100%;
   }
 }
