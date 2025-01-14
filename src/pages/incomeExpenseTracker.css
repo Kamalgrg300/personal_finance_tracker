@@ -1,0 +1,108 @@
+/* IncomeExpenseTracker.css */
+
+.tracker-container {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.year-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.year-selector label {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #555;
+}
+
+.year-selector select {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.month-input {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  flex: 1 1 calc(33.333% - 20px);
+  box-sizing: border-box;
+  min-width: 250px;
+}
+
+.month-input h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.month-input label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.month-input input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.month-input p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+.chart-section {
+  margin-top: 20px;
+}
+
+.chart-section h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .month-input {
+    flex: 1 1 100%;
+  }
+
+  .year-selector {
+    flex-direction: column;
+  }
+
+  .year-selector label {
+    margin-bottom: 5px;
+  }
+}

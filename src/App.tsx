@@ -14,7 +14,7 @@ const App: React.FC = () => (
     <Navbar />
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/incomeExpenseTracker" element={<Home />} />
         <Route path="/income" element={<Income />} />
         <Route path="/expense" element={<Expense />} />
         <Route path="/savings" element={<Savings />} />

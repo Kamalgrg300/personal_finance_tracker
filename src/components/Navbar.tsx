@@ -40,6 +40,9 @@ const Navbar: React.FC = () => (
           </Link>
         </div>
       </div>
+      <Link to="/incomeExpenseTracker" className="nav-link">
+        IncomeExpenseTracker
+      </Link>
     </div>
   </nav>
 );
