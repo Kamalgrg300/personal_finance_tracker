@@ -8,6 +8,7 @@ const Home = lazy(() => import("./pages/home"));
 const Income = lazy(() => import("./pages/income"));
 const Expense = lazy(() => import("./pages/expense"));
 const Savings = lazy(() => import("./pages/accounts"));
+const IncomeExpenseTracker = lazy(() => import("./pages/incomeExpenseTracker"));
 
 const App: React.FC = () => (
   <Router>
@@ -18,6 +19,10 @@ const App: React.FC = () => (
         <Route path="/income" element={<Income />} />
         <Route path="/expense" element={<Expense />} />
         <Route path="/savings" element={<Savings />} />
+        <Route
+          path="/incomeExpenseTracker"
+          element={<IncomeExpenseTracker />}
+        />
       </Routes>
     </Suspense>
   </Router>

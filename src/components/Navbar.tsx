@@ -1,4 +1,3 @@
-/* src/components/Navbar.tsx */
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
@@ -40,8 +39,8 @@ const Navbar: React.FC = () => (
           </Link>
         </div>
       </div>
-      <Link to="/incomeExpenseTracker" className="nav-link">
-        IncomeExpenseTracker
+      <Link to="/tracker" className="nav-link">
+        Income & Expense Tracker
       </Link>
     </div>
   </nav>
