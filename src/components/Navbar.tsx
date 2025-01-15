@@ -1,3 +1,4 @@
+/* src/components/Navbar.tsx */
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
@@ -31,7 +32,7 @@ const Navbar: React.FC = () => (
       </div>
       <div className="dropdown">
         <Link to="#" className="nav-link dropdown-link">
-          Accounts
+          Savings
         </Link>
         <div className="dropdown-content">
           <Link to="/savings" className="nav-link">
@@ -39,10 +40,8 @@ const Navbar: React.FC = () => (
           </Link>
         </div>
       </div>
-      <Link to="/income-expense-tracker" className="nav-link">
-        {" "}
-        {/* Updated link */}
-        Income & Expense Tracker
+      <Link to="/tracker" className="nav-link">
+        Income vs Expense Tracker
       </Link>
     </div>
   </nav>

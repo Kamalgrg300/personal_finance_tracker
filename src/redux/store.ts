@@ -1,14 +1,18 @@
-/* src/redux/store.ts */
+// src/redux/store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import transactionsReducer from "./transactionsSlice";
+import incomeReducer from "../slices/incomeSlice";
+import expenseReducer from "../slices/expenseSlice";
+import trackerReducer from "../slices/trackerSlice";
+import savingsReducer from "../slices/savingsSlice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    transactions: transactionsReducer,
+    income: incomeReducer,
+    expense: expenseReducer,
+    tracker: trackerReducer,
+    savings: savingsReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-export default store;

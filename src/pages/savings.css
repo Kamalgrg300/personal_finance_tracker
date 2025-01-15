@@ -11,7 +11,7 @@ body {
   overflow-x: hidden;
 }
 
-.tracker-container {
+.savings-container {
   position: relative;
   padding: 20px;
   min-height: 100vh;
@@ -24,7 +24,7 @@ body {
   margin-top: 60px; /* Adjust margin to prevent overlap with navbar */
 }
 
-.tracker-container img {
+.savings-container img {
   width: 100%;
   height: 100vh; /* Ensure it takes the full height of the viewport */
   object-fit: cover; /* Scale the image to cover the entire container */
@@ -85,10 +85,10 @@ input {
 select:focus,
 input:focus {
   outline: none;
-  border-color: #ff5733;
+  border-color: #33ff57;
 }
 
-button.update-btn {
+button.add-savings-btn {
   background-color: #33ff57;
   color: white;
   padding: 15px 20px;
@@ -101,8 +101,8 @@ button.update-btn {
   border: none;
 }
 
-button.update-btn:hover {
-  background-color: #28b34f;
+button.add-savings-btn:hover {
+  background-color: #28a745;
 }
 
 .summary {
@@ -120,24 +120,22 @@ button.update-btn:hover {
   font-weight: 700;
 }
 
-.chart-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 40px;
-  gap: 30px; /* Adds space between the charts */
+.total-savings {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
 }
 
-.bar-chart,
-.pie-chart {
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.6);
+.bar-chart {
+  margin-top: 40px;
+  width: 80%;
+  max-width: 700px;
   border-radius: 15px;
   padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-.pie-chart h3,
 .bar-chart h3 {
   font-size: 1.5rem;
   font-weight: bold;
@@ -159,7 +157,7 @@ button.update-btn:hover {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .tracker-container {
+  .savings-container {
     padding: 20px;
   }
 
@@ -179,7 +177,7 @@ button.update-btn:hover {
     margin-bottom: 15px;
   }
 
-  button.update-btn {
+  button.add-savings-btn {
     font-size: 1rem;
     padding: 12px;
   }
@@ -188,29 +186,18 @@ button.update-btn:hover {
     padding: 15px;
   }
 
-  .chart-container {
-    flex-direction: column; /* Stack charts vertically on mobile */
-    gap: 20px;
-  }
-
-  .pie-chart,
-  .bar-chart {
-    width: 100%;
+  .total-savings {
+    font-size: 1.2rem;
   }
 }
 
 /* Tablet Responsiveness */
 @media (max-width: 1024px) {
-  .tracker-container {
+  .savings-container {
     padding: 30px;
   }
 
-  .chart-container {
-    flex-direction: column; /* Stack charts vertically on tablets */
-  }
-
-  .pie-chart,
   .bar-chart {
-    width: 100%;
+    margin-top: 30px;
   }
 }

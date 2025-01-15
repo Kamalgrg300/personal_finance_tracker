@@ -1,4 +1,3 @@
-/* src/pages/Expense.tsx */
 import React, { useState } from "react";
 import { Pie } from "react-chartjs-2";
 import {
@@ -10,6 +9,9 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
+import { useDispatch, useSelector } from "react-redux";
+import { addExpense } from "../slices/expenseSlice";
+import { RootState } from "../redux/store";
 import "./Expense.css";
 
 ChartJS.register(
@@ -21,33 +23,41 @@ ChartJS.register(
   LinearScale
 );
 
+// Define a union type for months
+type Month =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December";
+
+// Define the valid expense categories
+type ExpenseCategory = "groceries" | "rent" | "utilities" | "entertainment";
+
+// Expense component
 const Expense: React.FC = () => {
-  const [selectedMonth, setSelectedMonth] = useState<string>("January");
-  const [selectedExpenseType, setSelectedExpenseType] = useState<string>("");
+  const dispatch = useDispatch();
+  const expenseData = useSelector((state: RootState) => state.expense);
+  const [selectedMonth, setSelectedMonth] = useState<Month>("January");
+  const [selectedExpenseCategory, setSelectedExpenseCategory] =
+    useState<ExpenseCategory>("groceries");
   const [expenseAmount, setExpenseAmount] = useState<number>(0);
 
-  // State to store expense data for each month and type
-  const [expenseData, setExpenseData] = useState<any>({
-    January: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    February: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    March: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    April: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    May: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    June: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    July: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    August: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    September: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    October: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    November: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-    December: { groceries: 0, rent: 0, utilities: 0, entertainment: 0 },
-  });
-
   const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedMonth(e.target.value);
+    setSelectedMonth(e.target.value as Month); // Typecast to Month
   };
 
-  const handleExpenseTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedExpenseType(e.target.value);
+  const handleExpenseCategoryChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedExpenseCategory(e.target.value as ExpenseCategory);
   };
 
   const handleExpenseAmountChange = (
@@ -57,25 +67,24 @@ const Expense: React.FC = () => {
   };
 
   const handleAddExpense = () => {
-    if (selectedExpenseType && selectedMonth) {
-      setExpenseData((prevData: any) => ({
-        ...prevData,
-        [selectedMonth]: {
-          ...prevData[selectedMonth],
-          [selectedExpenseType]:
-            prevData[selectedMonth][selectedExpenseType] + expenseAmount,
-        },
-      }));
-      setExpenseAmount(0); // Reset the expense amount field
+    if (selectedExpenseCategory && selectedMonth && expenseAmount > 0) {
+      dispatch(
+        addExpense({
+          month: selectedMonth,
+          category: selectedExpenseCategory,
+          amount: expenseAmount,
+        })
+      );
+      setExpenseAmount(0); // Reset after adding
     }
   };
 
-  // Total expense for the selected month
-  const totalExpenseForMonth = Object.values(
-    expenseData[selectedMonth] || {}
-  ).reduce((acc: number, curr: number) => acc + curr, 0);
+  // Explicitly define totalExpenseForMonth type as number
+  const totalExpenseForMonth = Object.values(expenseData[selectedMonth]).reduce(
+    (acc, curr) => acc + curr,
+    0
+  ); // Type inference will now be correct
 
-  // Data for the pie chart for the selected month
   const pieChartData = {
     labels: ["Groceries", "Rent", "Utilities", "Entertainment"],
     datasets: [
@@ -98,10 +107,6 @@ const Expense: React.FC = () => {
 
   return (
     <div className="expense-container">
-      <img
-        src="https://m.media-amazon.com/images/I/61JfO8-6-FL._AC_UF1000,1000_QL80_.jpg"
-        alt="Expenses"
-      />
       <h2 className="title">Manage Your Expenses</h2>
       <p className="subtitle">
         Track your expenses and manage your financial budget.
@@ -121,13 +126,12 @@ const Expense: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="expenseType">Select Expense Type</label>
+          <label htmlFor="expenseCategory">Select Expense Category</label>
           <select
-            id="expenseType"
-            value={selectedExpenseType}
-            onChange={handleExpenseTypeChange}
+            id="expenseCategory"
+            value={selectedExpenseCategory}
+            onChange={handleExpenseCategoryChange}
           >
-            <option value="">--Select Expense Type--</option>
             <option value="groceries">Groceries</option>
             <option value="rent">Rent</option>
             <option value="utilities">Utilities</option>
